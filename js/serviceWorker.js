@@ -1,24 +1,22 @@
-var staticCacheName = "djangopwa-v1";
+const staticChachesName='site-statics'
+const assets = [
+	'/',
+	''
+];
 
-self.addEventListener("install", function (event) {
-	event.waitUntil(
-		caches.open(staticCacheName).then(function (cache) {
-			return cache.addAll(["/"]); // Specify the URLs to cache inside the array
-		})
-	);
+self.addEventListener('install', evt => {
+	// console.log('service Worker has been installed')
+	caches.open(staticChachesName).then(cache => {
+		cache.addAll()
+	})
+});
+console.log(self)
+//activate the service 
+self.addEventListener('activate', evt => {
+	// console.log('service worker has been activated')
 });
 
-self.addEventListener("fetch", function (event) {
-	var requestUrl = new URL(event.request.url);
-	if (requestUrl.origin === location.origin) {
-		if (requestUrl.pathname === "/") {
-			event.respondWith(caches.match("/")); // Specify the URL to match for the home page
-			return;
-		}
-	}
-	event.respondWith(
-		caches.match(event.request).then(function (response) {
-			return response || fetch(event.request);
-		})
-	);
+//listen to fetch events
+self.addEventListener('fetch', evt => { 
+	// console.log('fetch event',evt)
 });
