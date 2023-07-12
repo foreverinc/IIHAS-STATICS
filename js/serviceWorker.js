@@ -3,14 +3,14 @@ const dynamicChache='pages-cache-v1';
 
 const assets = [
 	"/",
-	"static/js/main.js",
-	"static/css/output.css",
-	"static/img/default.png",
-	"static/img/badge.svg",
-	"static/img/header.jpg",
+	"https://foreverinc.github.io/IIHAS-STATICS/js/main.js",
+	"https://foreverinc.github.io/IIHAS-STATICS/css/output.css",
+	"https://foreverinc.github.io/IIHAS-STATICS/img/default.png",
+	"https://foreverinc.github.io/IIHAS-STATICS/img/badge.svg",
+	"https://foreverinc.github.io/IIHAS-STATICS/img/header.jpg",
 	"https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap",
-	"static/logo.svg",
-	"static/favicon.ico",
+	"https://foreverinc.github.io/IIHAS-STATICS/logo.svg",
+	"https://foreverinc.github.io/IIHAS-STATICS/favicon.ico",
 	//added
 	"/manifest.json",
 	"https://fonts.gstatic.com/s/ptsans/v17/jizYRExUiTo99u79D0e0ysmIEDQ.woff2",
