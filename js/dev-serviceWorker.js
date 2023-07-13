@@ -1,21 +1,17 @@
-const staticCacheName = "site-statics-v2";
-
-
+const staticCacheName = "site-static-v0";
 const assets = [
 	"/",
-	"https://foreverinc.github.io/IIHAS-STATICS/js/main.js",
-	"https://foreverinc.github.io/IIHAS-STATICS/js/darkMode.js",
-	"https://foreverinc.github.io/IIHAS-STATICS/css/output.css",
-	"https://foreverinc.github.io/IIHAS-STATICS/img/default.png",
-	"https://foreverinc.github.io/IIHAS-STATICS/img/badge.svg",
-	"https://foreverinc.github.io/IIHAS-STATICS/img/header.jpg",
-	"https://foreverinc.github.io/IIHAS-STATICS/logo.svg",
-	"https://foreverinc.github.io/IIHAS-STATICS/favicon.ico",
-	//added
+	"/static/js/main.js",
+	"/static/js/darkMode.js",
+	"/static/css/output.css",
+	"/static/img/default.png",
+	"/static/img/badge.svg",
+	"/static/img/header.jpg",
+	"/static/logo.svg",
+	"/static/favicon.ico",
 	"/manifest.json",
 	"/offline/",
 ];
-
 
 // Install service worker
 self.addEventListener("install", (event) => {
