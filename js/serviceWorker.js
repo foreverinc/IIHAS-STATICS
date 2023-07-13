@@ -1,4 +1,4 @@
-const staticCacheName = "site-statics-v1.5";
+const staticCacheName = "site-statics-v1";
 
 
 const assets = [
@@ -15,7 +15,6 @@ const assets = [
 	"/manifest.json",
 	"/offline/",
 ];
-
 
 // Install service worker
 self.addEventListener("install", (event) => {
@@ -53,7 +52,11 @@ self.addEventListener("fetch", (event) => {
 		fetch(event.request)
 			.then((fetchResponse) => {
 				// Check if the response is valid
-				if (!fetchResponse || fetchResponse.status !== 200 || fetchResponse.type !== "basic") {
+				if (
+					!fetchResponse ||
+					fetchResponse.status !== 200 ||
+					fetchResponse.type !== "basic"
+				) {
 					return fetchResponse;
 				}
 
@@ -73,4 +76,20 @@ self.addEventListener("fetch", (event) => {
 				return caches.match("/offline/");
 			})
 	);
+});
+
+self.addEventListener("push", (event) => {
+	const data = event.data.json();
+
+	const head = data.head || "New Notification";
+	const body =
+		data.body ||
+		"This is default content. Your notification didn't have one";
+
+	const options = {
+		body: body,
+		icon: "https://i.imgur.com/MZM3K5w.png",
+	};
+
+	event.waitUntil(self.registration.showNotification(head, options));
 });
