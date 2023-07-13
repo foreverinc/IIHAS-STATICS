@@ -1,6 +1,14 @@
 const getPermissions = () => {
 	//default granted denied
-	alert(Notification.permission)
+	if (Notification.permission === 'granted') {
+		//pass
+	} else if (Notification.permission !== 'denied') {
+		Notification.requestPermission().then(permission => {
+			//pass
+		})
+	}
 }
 
-getPermissions()
+document.addEventListener("DOMContentLoaded", () => {
+	getPermissions();
+});
