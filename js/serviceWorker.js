@@ -1,4 +1,4 @@
-const staticCacheName = "site-statics-v1";
+const staticCacheName = "site-statics-v0";
 
 
 const assets = [
@@ -15,6 +15,7 @@ const assets = [
 	"/manifest.json",
 	"/offline/",
 ];
+
 
 // Install service worker
 self.addEventListener("install", (event) => {
@@ -79,17 +80,39 @@ self.addEventListener("fetch", (event) => {
 });
 
 self.addEventListener("push", (event) => {
-	const data = event.data.json();
+	if (self.Notification && self.Notification.permission === "granted") {
+		const data = event.data ? event.data.json() : {};
+		const title = data.title || "New Notification";
+		const message = data.message || "Hey!! You've got something at Redo";
+		const icon = "https://i.ibb.co/YbFPdWS/redo-2-removebg-preview.png";
 
-	const head = data.head || "New Notification";
-	const body =
-		data.body ||
-		"This is default content. Your notification didn't have one";
+		const options = {
+			body: message,
+			tag: "simple-push-demo-notification",
+			icon: icon,
+			actions: [
+				{
+					title: "View",
+					action: "https://redo-testapp.onrender.com/",
+				},
+			],
+		};
 
-	const options = {
-		body: body,
-		icon: "https://i.imgur.com/MZM3K5w.png",
-	};
+		event.waitUntil(self.registration.showNotification(title, options));
+	}
+});
 
-	event.waitUntil(self.registration.showNotification(head, options));
+self.addEventListener("notificationclick", (event) => {
+	event.notification.close();
+
+	event.waitUntil(
+		clients.matchAll().then((clientList) => {
+			const url = "https://redo-testapp.onrender.com/";
+			if (clientList && clientList.length) {
+				return clientList[0].focus();
+			}
+
+			return clients.openWindow(url);
+		})
+	);
 });
